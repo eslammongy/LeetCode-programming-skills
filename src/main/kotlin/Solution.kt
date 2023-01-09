@@ -57,4 +57,66 @@ class Solution {
         return productDigits - sumDigits
     }
 
+    fun largestPerimeter(nums: IntArray): Int {
+        if (nums.size < 3) return 0
+
+        var perimeter = 0
+        //nums.sort()
+
+        if (nums.size == 3 && nums[0] + nums[1] > nums[2]){
+            perimeter = nums[0] + nums[1] + nums[2]
+            println("perimeter = $perimeter")
+            return perimeter
+        }
+        // 1, 2, 1, 10
+        for (i in 1 until nums.size-1){
+            if (nums[i-1] + nums[i] > nums[i + if(i == nums.size - 1) 0 else 1]){
+                perimeter = nums[i] + nums[i-1] + nums[i+ if(i == nums.size - 1) 0 else 1]
+            }
+            if (nums[i] + nums[i-1] > nums[i + if(i == nums.size - 1) 0 else 1]){
+                perimeter = nums[i] + nums[i-1] + nums[i+ if(i == nums.size - 1) 0 else 1]
+            }else{
+                continue
+            }
+        }
+        return perimeter
+    }
+    fun largestPerimeter2(nums: IntArray): Int {
+        if (nums.size < 3) return 0
+        //[3,2,3,4]
+        nums.sort()
+        //[2, 3, 3, 4]
+        println(nums.toList())
+        if (nums.size == 3 && nums[0] + nums[1] > nums[2]){
+            return nums[0] + nums[1] + nums[2]
+        }
+
+        for (i in nums.size-1 downTo 2){
+            if (nums[i-1] + nums[i-2] > nums[i]){
+                return nums[i-1] + nums[i-2] + nums[i]
+            }
+        }
+        return 0
+    }
+    private fun doQuickSort(array: IntArray): IntArray {
+        if (array.size < 2) return array
+        val greeterList = mutableListOf<Int>()
+        val lessList = mutableListOf<Int>()
+        var equalItem = 0
+        val pivot = array[array.size / 2]
+        for (item in array){
+            if (item < pivot){
+                lessList.add(item)
+            }
+            if (item > pivot){
+                greeterList.add(item)
+            }
+            if (item == pivot){
+                equalItem = item
+            }
+        }
+
+        return doQuickSort(lessList.toIntArray()) + equalItem + doQuickSort(greeterList.toIntArray()) // 4
+    }
+
 }

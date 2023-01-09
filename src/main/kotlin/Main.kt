@@ -1,19 +1,19 @@
+import java.text.SimpleDateFormat
+import java.util.*
+
 fun main() {
-
-    val nums = calcSalaryAverage2(intArrayOf(2000,9000,3000, 1000, 5000, 4000))
-    println(nums)
     val solution = Solution()
-    /*
-  Input: n = 4421
+   /* val nums = calcSalaryAverage2(intArrayOf(2000,9000,3000, 1000, 5000, 4000))
+   // println(nums)
 
-Output: 21
-Explanation:
-Product of digits = 4 * 4 * 2 * 1 = 32
-Sum of digits = 4 + 4 + 2 + 1 = 11
-Result = 32 - 11 = 21
-    * */
-    val hammingWeight = solution.subtractProductAndSum2(234)
-    println(hammingWeight)
+    val response = 1673190000
+    val updatedAt = response.toLong()
+    val updatedAtText = "Updated at: " + SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.ENGLISH).format(Date(updatedAt * 1000))
+   //println(updatedAtText)
+   */
+
+    val largestPerimeter = solution.largestPerimeter2(intArrayOf(3,2,3,4))
+    println(largestPerimeter)
 }
 
 
@@ -58,27 +58,8 @@ return total / (salaries.size - 2)
 
 }
 
-fun calcSalaryAverage2(salaries: IntArray): Double {
+/*fun calcSalaryAverage2(salaries: IntArray): Double {
     val nums = doQuickSort(salaries)
     return nums.copyOfRange(1, nums.size - 1).average()
-}
-fun doQuickSort(array: IntArray): IntArray {
-    if (array.size < 2) return array
-    val greeterList = mutableListOf<Int>()
-    val lessList = mutableListOf<Int>()
-    var equalItem = 0
-    val pivot = array[array.size / 2]
-    for (item in array){
-        if (item < pivot){
-            lessList.add(item)
-        }
-        if (item > pivot){
-            greeterList.add(item)
-        }
-        if (item == pivot){
-            equalItem = item
-        }
-    }
+}*/
 
-    return doQuickSort(lessList.toIntArray()) + equalItem + doQuickSort(greeterList.toIntArray()) // 4
-}
