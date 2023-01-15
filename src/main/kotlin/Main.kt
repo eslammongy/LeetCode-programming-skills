@@ -1,8 +1,10 @@
+import binarysearch.BinarySearch1
 import java.text.SimpleDateFormat
 import java.util.*
 
 fun main() {
     val solution = Solution()
+    val binarySearch1 = BinarySearch1()
    /* val nums = calcSalaryAverage2(intArrayOf(2000,9000,3000, 1000, 5000, 4000))
    // println(nums)
 
@@ -11,9 +13,11 @@ fun main() {
     val updatedAtText = "Updated at: " + SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.ENGLISH).format(Date(updatedAt * 1000))
    //println(updatedAtText)
    */
-
-    val largestPerimeter = solution.largestPerimeter2(intArrayOf(3,2,3,4))
-    println(largestPerimeter)
+    //[[1,2],[3,1],[2,4],[2,3],[4,4]]
+    //val points:Array<IntArray> = arrayOf(intArrayOf(1,2), intArrayOf(3,1), intArrayOf(2,4), intArrayOf(2,3), intArrayOf(4,4))
+    val points:IntArray = intArrayOf(-1,0,3,5,9,12)
+    val target = binarySearch1.search(points, 9)
+    println(target)
 }
 
 

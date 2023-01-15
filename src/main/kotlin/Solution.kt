@@ -1,3 +1,5 @@
+import kotlin.math.abs
+
 class Solution {
 
     // you need treat n as an unsigned value
@@ -117,6 +119,40 @@ class Solution {
         }
 
         return doQuickSort(lessList.toIntArray()) + equalItem + doQuickSort(greeterList.toIntArray()) // 4
+    }
+
+    //Input: x = 3, y = 4, points = [[1,2],[3,1],[2,4],[2,3],[4,4]]
+    fun nearestValidPoint(x: Int, y: Int, points: Array<IntArray>): Int {
+        //x = 3, y = 4, points = [[3,4]]
+        var distance = Int.MAX_VALUE
+        var smallestDisIndex = 0
+        var validDistance = Int.MAX_VALUE
+        for (i in points.indices){
+            if (x == points[i][0] && y == points[i][1]){
+                distance = 0
+            }
+            if (x == points[i][0] || y == points[i][1]){
+                    val currentDis = abs(x - points[i][0]) + abs(y - points[i][1])
+                    if (currentDis < validDistance){
+                        validDistance = currentDis
+                        smallestDisIndex = i
+
+                    }
+            }
+            else{
+                    distance = -1
+            }
+            println("SmallIndex:: $smallestDisIndex")
+        }
+
+        return if (smallestDisIndex > 0){
+            smallestDisIndex
+        }else if (distance == 0){
+            0
+        }else{
+            -1
+        }
+
     }
 
 }
