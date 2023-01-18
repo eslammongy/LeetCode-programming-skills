@@ -171,6 +171,14 @@ class Solution {
         return nearestPoint
     }
 
+    fun arraySign(nums: IntArray): Int {
+        var isNegative = false
+        for (num in nums) {
+            if (num == 0) return 0
+            if (num < 0) isNegative = !isNegative
+        }
+        return if (isNegative) -1 else 1
+    }
 
 
 }
