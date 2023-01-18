@@ -3,7 +3,7 @@ import kotlin.math.abs
 class Solution {
 
     // you need treat n as an unsigned value
-    fun hammingWeight(n:Int):Int {
+    fun hammingWeight(n: Int): Int {
         var countBits = 0
         var num = n
 
@@ -16,16 +16,17 @@ class Solution {
         return countBits
     }
 
-    fun hammingWeight2(n:Int):Int {
+    fun hammingWeight2(n: Int): Int {
         var count = 0
         var nums = n
-        while(nums != 0){
-            nums = nums and  (nums-1)
+        while (nums != 0) {
+            nums = nums and (nums - 1)
             count += 1
         }
 
         return count
     }
+
     fun numberOfDigits(n: Int): Int =
         when (n) {
             in -9..9 -> 1
@@ -38,7 +39,7 @@ class Solution {
         val numTxt = n.toString()
         var sumDigits = 0
         var productDigits = 1
-        for (i in numTxt.indices){
+        for (i in numTxt.indices) {
             sumDigits += numTxt[i].toString().toInt()
             productDigits *= numTxt[i].toString().toInt()
         }
@@ -65,55 +66,57 @@ class Solution {
         var perimeter = 0
         //nums.sort()
 
-        if (nums.size == 3 && nums[0] + nums[1] > nums[2]){
+        if (nums.size == 3 && nums[0] + nums[1] > nums[2]) {
             perimeter = nums[0] + nums[1] + nums[2]
             println("perimeter = $perimeter")
             return perimeter
         }
         // 1, 2, 1, 10
-        for (i in 1 until nums.size-1){
-            if (nums[i-1] + nums[i] > nums[i + if(i == nums.size - 1) 0 else 1]){
-                perimeter = nums[i] + nums[i-1] + nums[i+ if(i == nums.size - 1) 0 else 1]
+        for (i in 1 until nums.size - 1) {
+            if (nums[i - 1] + nums[i] > nums[i + if (i == nums.size - 1) 0 else 1]) {
+                perimeter = nums[i] + nums[i - 1] + nums[i + if (i == nums.size - 1) 0 else 1]
             }
-            if (nums[i] + nums[i-1] > nums[i + if(i == nums.size - 1) 0 else 1]){
-                perimeter = nums[i] + nums[i-1] + nums[i+ if(i == nums.size - 1) 0 else 1]
-            }else{
+            if (nums[i] + nums[i - 1] > nums[i + if (i == nums.size - 1) 0 else 1]) {
+                perimeter = nums[i] + nums[i - 1] + nums[i + if (i == nums.size - 1) 0 else 1]
+            } else {
                 continue
             }
         }
         return perimeter
     }
+
     fun largestPerimeter2(nums: IntArray): Int {
         if (nums.size < 3) return 0
         //[3,2,3,4]
         nums.sort()
         //[2, 3, 3, 4]
         println(nums.toList())
-        if (nums.size == 3 && nums[0] + nums[1] > nums[2]){
+        if (nums.size == 3 && nums[0] + nums[1] > nums[2]) {
             return nums[0] + nums[1] + nums[2]
         }
 
-        for (i in nums.size-1 downTo 2){
-            if (nums[i-1] + nums[i-2] > nums[i]){
-                return nums[i-1] + nums[i-2] + nums[i]
+        for (i in nums.size - 1 downTo 2) {
+            if (nums[i - 1] + nums[i - 2] > nums[i]) {
+                return nums[i - 1] + nums[i - 2] + nums[i]
             }
         }
         return 0
     }
+
     private fun doQuickSort(array: IntArray): IntArray {
         if (array.size < 2) return array
         val greeterList = mutableListOf<Int>()
         val lessList = mutableListOf<Int>()
         var equalItem = 0
         val pivot = array[array.size / 2]
-        for (item in array){
-            if (item < pivot){
+        for (item in array) {
+            if (item < pivot) {
                 lessList.add(item)
             }
-            if (item > pivot){
+            if (item > pivot) {
                 greeterList.add(item)
             }
-            if (item == pivot){
+            if (item == pivot) {
                 equalItem = item
             }
         }
@@ -121,38 +124,53 @@ class Solution {
         return doQuickSort(lessList.toIntArray()) + equalItem + doQuickSort(greeterList.toIntArray()) // 4
     }
 
-    //Input: x = 3, y = 4, points = [[1,2],[3,1],[2,4],[2,3],[4,4]]
+    //Input: x = 1, y = 1, points = //[[1,2],[3,3],[3,3]]
     fun nearestValidPoint(x: Int, y: Int, points: Array<IntArray>): Int {
-        //x = 3, y = 4, points = [[3,4]]
-        var distance = Int.MAX_VALUE
+        var distance = 0
         var smallestDisIndex = 0
         var validDistance = Int.MAX_VALUE
-        for (i in points.indices){
-            if (x == points[i][0] && y == points[i][1]){
+        for (i in points.indices) {
+
+            if (x == points[i][0] || y == points[i][1]) {
+                val currentDis = abs(x - points[i][0]) + abs(y - points[i][1])
+                if (currentDis < validDistance) {
+                    validDistance = currentDis
+                    smallestDisIndex = i
+                }
+            } else {
+                distance = -1
+            }
+            if (x == points[i][0] && y == points[i][1]) {
                 distance = 0
             }
-            if (x == points[i][0] || y == points[i][1]){
-                    val currentDis = abs(x - points[i][0]) + abs(y - points[i][1])
-                    if (currentDis < validDistance){
-                        validDistance = currentDis
-                        smallestDisIndex = i
-
-                    }
-            }
-            else{
-                    distance = -1
-            }
-            println("SmallIndex:: $smallestDisIndex")
         }
 
-        return if (smallestDisIndex > 0){
+        return if (smallestDisIndex > 0 || validDistance != Int.MAX_VALUE) {
             smallestDisIndex
-        }else if (distance == 0){
+        } else if (distance != -1) {
             0
-        }else{
+        } else {
             -1
         }
-
     }
+
+    fun nearestValidPoint2(x: Int, y: Int, points: Array<IntArray>): Int {
+        //Input: x = 1, y = 1, points = //[[1,2],[3,3],[3,3]]
+        var nearestPoint = -1
+        var validDistance = Int.MAX_VALUE
+        for (i in points.indices) {
+
+            if (((points[i][0] - x) * (points[i][1] - y) == 0)) {
+                val currentDis = abs(x - points[i][0]) + abs(y - points[i][1])
+                if (currentDis < validDistance) {
+                    validDistance = currentDis
+                    nearestPoint = i
+                }
+            }
+        }
+        return nearestPoint
+    }
+
+
 
 }

@@ -5,18 +5,10 @@ import java.util.*
 fun main() {
     val solution = Solution()
     val binarySearch1 = BinarySearch1()
-   /* val nums = calcSalaryAverage2(intArrayOf(2000,9000,3000, 1000, 5000, 4000))
-   // println(nums)
 
-    val response = 1673190000
-    val updatedAt = response.toLong()
-    val updatedAtText = "Updated at: " + SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.ENGLISH).format(Date(updatedAt * 1000))
-   //println(updatedAtText)
-   */
-    //[[1,2],[3,1],[2,4],[2,3],[4,4]]
-    //val points:Array<IntArray> = arrayOf(intArrayOf(1,2), intArrayOf(3,1), intArrayOf(2,4), intArrayOf(2,3), intArrayOf(4,4))
-    val points:IntArray = intArrayOf(-1,0,3,5,9,12)
-    val target = binarySearch1.search(points, 9)
+    //[[1,2],[3,3],[3,3]]
+    val points:Array<IntArray> = arrayOf(intArrayOf(1,2), intArrayOf(3,3), intArrayOf(3,3))
+    val target = solution.nearestValidPoint(1, 1, points)
     println(target)
 }
 
