@@ -1,3 +1,4 @@
+import java.util.Arrays
 import kotlin.math.abs
 
 class Solution {
@@ -178,6 +179,32 @@ class Solution {
             if (num < 0) isNegative = !isNegative
         }
         return if (isNegative) -1 else 1
+    }
+
+    fun canMakeArithmeticProgression(nums: IntArray): Boolean {
+        var result = false
+        nums.sort()
+        val diff = nums[0] - nums[1] //-4
+        for (i in 0..nums.size - 2) {
+            println("The diff ${ nums[i] - nums[i + 1]}")
+            if (nums[i] == nums[i + 1]) result = true
+            result = nums[i] - nums[i + 1] == diff
+            if (!result) return false
+        }
+
+        return result
+    }
+
+    fun canMakeArithmeticProgression2(nums: IntArray): Boolean {
+
+        Arrays.sort(nums)
+        val diff = nums[1] - nums[0] //-4
+        for (i in 1 until nums.size-1) {
+            if (nums[i+1] - nums[i] != diff) return false
+
+        }
+
+        return true
     }
 
 
