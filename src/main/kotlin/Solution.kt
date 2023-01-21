@@ -231,4 +231,88 @@ class Solution {
         return num == 1
     }
 
+    fun areAlmostEqual(s1: String, s2: String): Boolean {
+        // check if the two strings are already equal or not
+        if (s1 == s2) return true
+        //looping throw string indices and do swapping operation at most once then check if thw two strings after swapping operation equal or not
+        for (i in s2.indices) {
+            val swappedString = swapChar(i, s2.lastIndex, s2)
+            return s1 == swappedString
+        }
+        return false
+    }
+
+    private fun swapChar(oldIndex: Int, newIndex: Int, word: String): String {
+
+        val charList = word.toMutableList()
+        val temp = charList[oldIndex]
+        charList[oldIndex] = charList[newIndex]
+        charList[newIndex] = temp
+
+        println(
+            "Word -> ${
+                charList.joinToString(separator = "")
+            }"
+        )
+
+
+        return charList.joinToString(separator = "")
+    }
+
+    /* let count = 0, arr1 = [], arr2 = []
+    for (let i = 0; i < s1.length; i++) {
+        if (s1[i] !== s2[i]) {
+            arr1.push(s1[i])
+            arr2.push(s2[i])
+            count++
+        }
+        if (count > 2)
+            return false
+    }
+    if (count === 2) {
+        return JSON.stringify(arr1.sort()) === JSON.stringify(arr2.sort())
+    }
+    return count === 0*/
+    fun areAlmostEqual2(s1: String, s2: String): Boolean{
+        var count = 0
+        val arr1 = mutableListOf<Char>()
+        val arr2 = mutableListOf<Char>()
+        for (i in s1.indices) {
+            if (s1[i] != s2[i]) {
+                arr1.add(s1[i])
+                arr2.add(s2[i])
+                count++
+
+            }
+            if (count > 2) return false
+        }
+
+        if (count == 2) {
+
+            return arr1.sort().toString() == arr2.sort().toString()
+        }
+        return count == 0
+    }
+    fun areAlmostEqual1(s1: String, s2: String): Boolean {
+        if (s1 == s2) return true
+        var index1 = -1
+        var index2 = -1
+        for (i in s1.indices) {
+            if (s1[i] != s2[i]) {
+                if (index1 == -1) {
+                    index1 = i
+                } else if (index2 == -1) {
+                    index2 = i
+                } else {
+                    return false
+                }
+            }
+        }
+        if (index1 < 0) return true;
+        if (index2 < 0) return false;
+        if (s1[index1] == s2[index2] && s1[index2] == s2[index1]) return true;
+        return false;
+    }
+
+
 }
