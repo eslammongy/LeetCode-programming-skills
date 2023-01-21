@@ -6,9 +6,8 @@ fun main() {
     val solution = Solution()
     val binarySearch1 = BinarySearch1()
 
-    //[[1,2],[3,3],[3,3]]
-    val points:IntArray = intArrayOf(1,5,6,10)
-    val target = solution.canMakeArithmeticProgression(points)
+    //val points:IntArray = intArrayOf(1,5,6,10)
+    val target = solution.isHappy(19)
     println(target)
 }
 

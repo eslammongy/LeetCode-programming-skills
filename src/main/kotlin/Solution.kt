@@ -1,5 +1,6 @@
 import java.util.Arrays
 import kotlin.math.abs
+import kotlin.math.pow
 
 class Solution {
 
@@ -186,7 +187,7 @@ class Solution {
         nums.sort()
         val diff = nums[0] - nums[1] //-4
         for (i in 0..nums.size - 2) {
-            println("The diff ${ nums[i] - nums[i + 1]}")
+            println("The diff ${nums[i] - nums[i + 1]}")
             if (nums[i] == nums[i + 1]) result = true
             result = nums[i] - nums[i + 1] == diff
             if (!result) return false
@@ -199,13 +200,35 @@ class Solution {
 
         Arrays.sort(nums)
         val diff = nums[1] - nums[0] //-4
-        for (i in 1 until nums.size-1) {
-            if (nums[i+1] - nums[i] != diff) return false
+        for (i in 1 until nums.size - 1) {
+            if (nums[i + 1] - nums[i] != diff) return false
 
         }
 
         return true
     }
 
+    /*Get the sum of the digits squared first*/
+    private fun sumSquareNumberDigits(n: Int): Int {
+        var num = n
+        var total = 0
+        while (num > 0) {
+            val remainder = num % 10
+            num /= 10
+            total += remainder * remainder
+        }
+        return total
+    }
+
+    fun isHappy(n: Int): Boolean {
+        var num = n
+        val seenValues = HashSet<Int>()
+        // Make sure we don't go to the same values again
+        while (num != 1 && !(seenValues.contains(num))) {
+            seenValues.add(num)
+            num = sumSquareNumberDigits(num)
+        }
+        return num == 1
+    }
 
 }
