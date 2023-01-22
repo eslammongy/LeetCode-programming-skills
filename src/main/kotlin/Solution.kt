@@ -1,6 +1,5 @@
 import java.util.Arrays
 import kotlin.math.abs
-import kotlin.math.pow
 
 class Solution {
 
@@ -314,5 +313,34 @@ class Solution {
         return false;
     }
 
-
+    fun maximumWealth(accounts: Array<IntArray>): Int {
+        //[[1,5],[7,3],[3,5]]
+        var maxWealth = 0
+        var currentWealth = 0
+        for (i in accounts.indices){
+            currentWealth = 0
+            for (j in accounts[i].indices){
+                currentWealth += accounts[i][j]
+            }
+            if (maxWealth < currentWealth){
+                maxWealth = currentWealth
+            }
+        }
+        return maxWealth
+    }
+    /*solve the same problem but using foreach*/
+    fun maximumWealth2(accounts: Array<IntArray>): Int {
+        //[[1,5],[7,3],[3,5]]
+        var maxWealth = 0
+        for (account in accounts){
+            var currentWealth = 0
+            for (balance in account){
+                currentWealth += balance
+            }
+            if (maxWealth < currentWealth){
+                maxWealth = currentWealth
+            }
+        }
+        return maxWealth
+    }
 }
