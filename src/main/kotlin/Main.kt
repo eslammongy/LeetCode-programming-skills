@@ -6,8 +6,9 @@ fun main() {
     val solution = Solution()
     val binarySearch1 = BinarySearch1()
     //[[1,5],[7,3],[3,5]]
-    val accounts:Array<IntArray> = arrayOf(intArrayOf(1,5), intArrayOf(7,3), intArrayOf(3,5))
-    val target = solution.maximumWealth2(accounts)
+   // val accounts:Array<IntArray> = arrayOf(intArrayOf(1,5), intArrayOf(7,3), intArrayOf(3,5))
+    val accounts:IntArray = intArrayOf(1,4,2,5,3)
+    val target = solution.sumOddLengthSubarrays(accounts)
     println(target)
 }
 

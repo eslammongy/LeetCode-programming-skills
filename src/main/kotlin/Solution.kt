@@ -343,4 +343,24 @@ class Solution {
         }
         return maxWealth
     }
+
+    fun sumOddLengthSubarrays(arr: IntArray): Int {
+        var left = 0
+            var result = 0
+            while (left < arr.size) {
+                var currentSum = arr[left]
+
+                val right = left + 1
+            result += arr[left]
+            for (index in right until arr.size) {
+                currentSum += arr[index]
+                if ((index - left) % 2 == 0) {
+                    result += currentSum
+                }
+            }
+            left++
+        }
+        return result
+    }
+
 }
