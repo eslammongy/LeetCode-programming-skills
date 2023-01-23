@@ -8,7 +8,8 @@ fun main() {
     //[[1,5],[7,3],[3,5]]
    // val accounts:Array<IntArray> = arrayOf(intArrayOf(1,5), intArrayOf(7,3), intArrayOf(3,5))
     val accounts:IntArray = intArrayOf(1,4,2,5,3)
-    val target = solution.sumOddLengthSubarrays(accounts)
+    //Input: word1 = "abc", word2 = "pqr" a p b q   r   s
+    val target = solution.mergeAlternately("abcd","pq")
     println(target)
 }
 

@@ -1,4 +1,4 @@
-import java.util.Arrays
+import java.util.*
 import kotlin.math.abs
 
 class Solution {
@@ -272,7 +272,7 @@ class Solution {
         return JSON.stringify(arr1.sort()) === JSON.stringify(arr2.sort())
     }
     return count === 0*/
-    fun areAlmostEqual2(s1: String, s2: String): Boolean{
+    fun areAlmostEqual2(s1: String, s2: String): Boolean {
         var count = 0
         val arr1 = mutableListOf<Char>()
         val arr2 = mutableListOf<Char>()
@@ -292,6 +292,7 @@ class Solution {
         }
         return count == 0
     }
+
     fun areAlmostEqual1(s1: String, s2: String): Boolean {
         if (s1 == s2) return true
         var index1 = -1
@@ -317,27 +318,28 @@ class Solution {
         //[[1,5],[7,3],[3,5]]
         var maxWealth = 0
         var currentWealth = 0
-        for (i in accounts.indices){
+        for (i in accounts.indices) {
             currentWealth = 0
-            for (j in accounts[i].indices){
+            for (j in accounts[i].indices) {
                 currentWealth += accounts[i][j]
             }
-            if (maxWealth < currentWealth){
+            if (maxWealth < currentWealth) {
                 maxWealth = currentWealth
             }
         }
         return maxWealth
     }
+
     /*solve the same problem but using foreach*/
     fun maximumWealth2(accounts: Array<IntArray>): Int {
         //[[1,5],[7,3],[3,5]]
         var maxWealth = 0
-        for (account in accounts){
+        for (account in accounts) {
             var currentWealth = 0
-            for (balance in account){
+            for (balance in account) {
                 currentWealth += balance
             }
-            if (maxWealth < currentWealth){
+            if (maxWealth < currentWealth) {
                 maxWealth = currentWealth
             }
         }
@@ -346,11 +348,11 @@ class Solution {
 
     fun sumOddLengthSubarrays(arr: IntArray): Int {
         var left = 0
-            var result = 0
-            while (left < arr.size) {
-                var currentSum = arr[left]
+        var result = 0
+        while (left < arr.size) {
+            var currentSum = arr[left]
 
-                val right = left + 1
+            val right = left + 1
             result += arr[left]
             for (index in right until arr.size) {
                 currentSum += arr[index]
@@ -362,5 +364,56 @@ class Solution {
         }
         return result
     }
+
+    fun findTheDifference(s: String, t: String): Char {
+        val asciiS = asciiSum(s)
+        val asciiT = asciiSum(t)
+        return (asciiT - asciiS).toChar()
+    }
+
+    private fun asciiSum(s: String): Int {
+        var sum = 0
+        for (element in s.toCharArray()) {
+            sum += element.toChar().toInt()
+        }
+        return sum
+    }
+
+    /*
+     Input: word1 = "abc", word2 = "pqr"
+Output: "apbqcr"
+Explanation: The merged string will be merged as so:
+word1:  a   b   c
+word2:    p   q   r
+merged: a p b q c r
+*/
+
+    fun mergeAlternately(word1: String, word2: String): String {
+        var mergedStr = ""
+        val strSize = if (word1.length > word2.length) word1.length - 1 else word2.length - 1
+        for (i in 0..strSize) {
+            if (i < word1.length && i < word2.length) mergedStr += "${word1[i]}${word2[i]}"
+            if (i < word1.length && i >= word2.length) mergedStr += "${word1[i]}"
+            if (i < word2.length && i >= word1.length) mergedStr += "${word2[i]}"
+        }
+        return mergedStr
+    }
+
+    fun mergeAlternately2(word1: String, word2: String): String {
+
+        val strLength = if (word1.length > word2.length) word1.length else word2.length
+
+        var mergedStr = ""
+        for (count in 0 until strLength) {
+            if (count < word1.length) {
+                mergedStr += word1[count]
+            }
+            if (count < word2.length) {
+                mergedStr += word2[count]
+            }
+        }
+        return mergedStr
+    }
+
 
 }
